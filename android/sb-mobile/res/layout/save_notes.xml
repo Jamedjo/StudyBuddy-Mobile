@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <jf.studybuddy.CameraPreview
+                android:id="@+id/surface"
+                android:layout_gravity="top|left"
+                android:layout_width="fill_parent"
+                android:layout_height="256px"
+                android:layout_weight="1"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+            <Button
+                    android:id="@+id/take"
+                    android:text="Take"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+            <Button
+                    android:id="@+id/save_and_tag"
+                    android:text="Save &amp; Tag"
+                    android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+            <Button
+                    android:id="@+id/save_untagged"
+                    android:text="Save Untagged"
+                    android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+            <Button
+                    android:id="@+id/discard"
+                    android:text="Discard"
+                    android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+            android:text="@string/camera_help"
+            android:layout_gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+</LinearLayout>
