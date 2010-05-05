@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_save_note"
+          android:title="Grab Note"
+          android:icon="@android:drawable/ic_menu_camera"/>
+    <item android:id="@+id/menu_view_tags"
+          android:title="View Tags"
+          android:icon="@android:drawable/ic_menu_sort_alphabetically"/>
+    <item android:id="@+id/menu_tag_note"
+          android:title="Tag Note"
+          android:icon="@android:drawable/ic_menu_edit"/>
+    <item android:id="@+id/menu_delete_note"
+          android:title="Delete Note"
+          android:icon="@android:drawable/ic_menu_delete"/>
+    <item android:id="@+id/menu_bluetooth_sync"
+          android:title="Bluetooth Sync"
+          android:icon="@android:drawable/ic_menu_share"/>
+</menu>

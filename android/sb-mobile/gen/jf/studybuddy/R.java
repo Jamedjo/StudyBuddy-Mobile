@@ -10,31 +10,77 @@ package jf.studybuddy;
 public final class R {
     public static final class attr {
     }
-
     public static final class drawable {
-        public static final int icon = 0x7f020000;
+        public static final int icon=0x7f020000;
     }
-
     public static final class id {
-        public static final int discard = 0x7f050004;
-        public static final int noteview = 0x7f050005;
-        public static final int save_and_tag = 0x7f050002;
-        public static final int save_untagged = 0x7f050003;
-        public static final int surface = 0x7f050000;
-        public static final int take = 0x7f050001;
+        public static final int discard=0x7f060007;
+        public static final int gallery_note_date=0x7f06000b;
+        public static final int gallery_note_number=0x7f06000a;
+        public static final int gallery_note_tags=0x7f06000c;
+        public static final int item_list=0x7f060011;
+        public static final int menu_bluetooth_sync=0x7f060018;
+        public static final int menu_delete_note=0x7f060017;
+        public static final int menu_save_note=0x7f060014;
+        public static final int menu_tag_note=0x7f060016;
+        public static final int menu_view_tags=0x7f060015;
+        public static final int note_gallery=0x7f060009;
+        public static final int noteview=0x7f060008;
+        public static final int save_and_tag=0x7f060005;
+        public static final int save_tag=0x7f060013;
+        public static final int save_untagged=0x7f060006;
+        public static final int somelayout=0x7f06000d;
+        public static final int surface=0x7f060003;
+        public static final int tag_count=0x7f06000f;
+        public static final int tag_id=0x7f060012;
+        public static final int tag_name=0x7f06000e;
+        public static final int tag_notes_cancel=0x7f060002;
+        public static final int tag_notes_list=0x7f060000;
+        public static final int tag_notes_save=0x7f060001;
+        public static final int tag_subtags=0x7f060010;
+        public static final int take=0x7f060004;
     }
-
     public static final class layout {
-        public static final int note_saved = 0x7f030000;
-        public static final int save_notes = 0x7f030001;
-        public static final int view_note = 0x7f030002;
+        public static final int dialog_tag_note=0x7f030000;
+        public static final int view_capture_note=0x7f030001;
+        public static final int view_note=0x7f030002;
+        public static final int view_note_gallery=0x7f030003;
+        public static final int view_tag_item=0x7f030004;
+        public static final int view_tag_list=0x7f030005;
     }
-
+    public static final class menu {
+        public static final int main_menu=0x7f050000;
+    }
     public static final class string {
-        public static final int app_name = 0x7f040000;
-        public static final int camera_help = 0x7f040003;
-        public static final int description = 0x7f040004;
-        public static final int take = 0x7f040002;
-        public static final int title = 0x7f040001;
+        public static final int app_name=0x7f040000;
+        public static final int bluetooth_connect_failed=0x7f040006;
+        public static final int bluetooth_done=0x7f040008;
+        public static final int bluetooth_error_sending=0x7f040007;
+        public static final int bluetooth_no_adapter=0x7f040005;
+        public static final int camera_help=0x7f040002;
+        public static final int description=0x7f040003;
+        public static final int taglist_help=0x7f040004;
+        public static final int title=0x7f040001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a SBActivity.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SBActivity_android_galleryItemBackground jf.studybuddy:android_galleryItemBackground}</code></td><td></td></tr>
+           </table>
+           @see #SBActivity_android_galleryItemBackground
+         */
+        public static final int[] SBActivity = {
+            0x0101004c
+        };
+        /**
+          <p>This symbol is the offset where the {@link jf.studybuddy.R.attr#android_galleryItemBackground}
+          attribute's value can be found in the {@link #SBActivity} array.
+          @attr name android:android_galleryItemBackground
+        */
+        public static final int SBActivity_android_galleryItemBackground = 0;
+    };
 }

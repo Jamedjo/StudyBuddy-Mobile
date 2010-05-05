@@ -2,9 +2,14 @@
 <resources>
     <string name="app_name">StudyBuddy</string>
     <string name="title">StudyBuddy Mobile!</string>
-    <string name="take">BAD ASS</string>
-    <string name="camera_help">Line up the image using the camera and use the button on the left to save it.\nPlease
-        note images can be rotated and tagged after being saved.
-    </string>
+    <string name="camera_help">Line up the image using the camera and use the button on the right to save it.</string>
     <string name="description">Created by the JacuzziFruit team.</string>
+    <string name="taglist_help">- Select a list item to see sub-tags.\n
+        - Select again to view notes with that tag.\n
+        - Select and hold to delete or edit tags.
+    </string>
+    <string name="bluetooth_no_adapter">No adapter found! Sync will not work :[</string>
+    <string name="bluetooth_connect_failed">Connection failed! :[</string>
+    <string name="bluetooth_error_sending">Error sending data.</string>
+    <string name="bluetooth_done">Sync complete!</string>
 </resources>

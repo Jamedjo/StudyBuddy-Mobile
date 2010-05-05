@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+    <Gallery android:id="@+id/note_gallery"
+             android:spacing="15px"
+             android:gravity="center"
+             android:layout_height="wrap_content"
+             android:layout_width="fill_parent"/>
+
+    <LinearLayout android:layout_below="@id/note_gallery"
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_height="wrap_content"
+                      android:layout_width="fill_parent">
+            <TextView android:text="Note:"
+                      android:textStyle="bold"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+            <TextView android:id="@+id/gallery_note_number"
+                      android:paddingLeft="3dip"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+            <TextView android:text="Saved:"
+                      android:textStyle="bold"
+                      android:paddingLeft="10dip"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+            <TextView android:id="@+id/gallery_note_date"
+                      android:paddingLeft="3dip"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_height="wrap_content"
+                      android:layout_width="fill_parent">
+            <TextView android:text="Tags:"
+                      android:textStyle="bold"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+            <TextView android:id="@+id/gallery_note_tags"
+                      android:paddingLeft="3dip"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

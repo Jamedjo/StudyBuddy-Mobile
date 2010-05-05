@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal">
+    <LinearLayout android:orientation="vertical"
+                  android:layout_height="fill_parent"
+                  android:layout_width="wrap_content"
+                  android:layout_weight="1">
+        <ListView android:id="@+id/item_list"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_weight="4">
+        <TextView android:text="Add new tag"
+                  android:textSize="18sp"
+                  android:layout_gravity="left"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:padding="3sp"/>
+        <EditText android:id="@+id/tag_id"
+                  android:singleLine="true"
+                  android:layout_height="40sp"
+                  android:layout_width="fill_parent"
+                  android:paddingLeft="4sp"
+                  android:paddingRight="4sp"
+                  android:paddingBottom="1sp"
+                  android:paddingTop="1sp"/>
+        <Button android:id="@+id/save_tag"
+                android:text="Save"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        <View android:layout_height="1sp"
+              android:layout_width="wrap_content"
+              android:background="#DDDDDDDD"
+              android:padding="10sp"/>
+        <TextView android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:textStyle="italic"
+                  android:text="@string/taglist_help"/>
+    </LinearLayout>
+</LinearLayout>

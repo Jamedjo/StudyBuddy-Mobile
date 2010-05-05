@@ -7,17 +7,17 @@ package jf.studybuddy.model;
  */
 public class Note {
     public static final String FOLDER_PREFIX = "sb-notes";
-    private int id;
+    private long id;
     private String fileName;
     private long saveTime;
 
-    public Note(int i, String s, long l) {
+    public Note(long i, String s, long l) {
         this.id = i;
         this.fileName = s;
         this.saveTime = l;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -27,5 +27,9 @@ public class Note {
 
     public long getSaveTime() {
         return saveTime;
+    }
+
+    public String toString() {
+        return "[Note:id="+id+";fileName="+fileName+";saveTime="+saveTime+"]";
     }
 }

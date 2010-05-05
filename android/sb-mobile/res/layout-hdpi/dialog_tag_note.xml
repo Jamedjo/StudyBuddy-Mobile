@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent"
+              android:orientation="vertical">
+    <ListView android:id="@+id/tag_notes_list"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+                android:choiceMode="multipleChoice"/>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="fill_parent"
+                  android:layout_width="fill_parent"
+                  android:gravity="center">
+        <Button android:id="@+id/tag_notes_save"
+                android:text="Save"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        <Button android:id="@+id/tag_notes_cancel"
+                android:text="Cancel"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
