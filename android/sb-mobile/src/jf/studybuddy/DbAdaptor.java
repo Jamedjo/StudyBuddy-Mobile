@@ -10,7 +10,7 @@ import android.util.Log;
 import jf.studybuddy.model.Note;
 
 /**
- * @author alex
+ * @author tim
  */
 public class DbAdaptor {
     /**
@@ -308,7 +308,7 @@ public class DbAdaptor {
             "CREATE TABLE meta_tags (tag1_id integer not null, " +
                     "tag2_id integer not null, " +
                     "PRIMARY KEY (tag1_id, tag2_id));",
-            "CREATE TABLE note_tags (tag_id integer not null, " +
+            "CREATE TABLE note_tagsHEAD (tag_id integer not null, " +
                     "note_id integer not null, " +
                     "PRIMARY KEY (tag_id, note_id));",
             /**
