@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Stack;
 
 /**
  * The main Activity class.
@@ -45,6 +46,8 @@ public class SBActivity extends Activity {
     private View viewCaptureNote, viewNote, viewTagList, viewNoteGallery;
     //the currently active view
     private View activeView;
+    //the previous views
+    private Stack<View> previousViews = new Stack<View>();
     //bluetooth
     private BluetoothService bService = new BluetoothService(this);
     //activity request id
@@ -86,6 +89,19 @@ public class SBActivity extends Activity {
         findViewById(R.id.take).setOnClickListener(cameraPreview);
         findViewById(R.id.save_untagged).setOnClickListener(cameraPreview);
         findViewById(R.id.save_and_tag).setOnClickListener(cameraPreview);
+
+        //set up the 'view untagged' option in the list menu
+        View someView = viewTagList.findViewById(R.id.tag_list_untagged);
+        someView.findViewById(R.id.tag_subtags).setVisibility(View.GONE);
+        ((TextView) someView.findViewById(R.id.tag_name)).setText("Click to view untagged notes");
+        someView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gallery g = (Gallery) viewNoteGallery.findViewById(R.id.note_gallery);
+                g.setAdapter(new NoteGalleryImageAdaptor(SBActivity.this, db.getUntaggedNotes()));
+                setContentView(viewNoteGallery);
+            }
+        });
 
         //set the list adaptor for our tag list
         final ListView lv = (ListView) viewTagList.findViewById(R.id.item_list);
@@ -171,7 +187,9 @@ public class SBActivity extends Activity {
                     sb.append(", ");
                 }
                 //delete the last 2 chars: ", "
-                sb.delete(sb.length() - 2, sb.length());
+                if (sb.length() > 0)
+                    sb.delete(sb.length() - 2, sb.length());
+                else sb.append("none");
                 ((TextView) viewNoteGallery.findViewById(R.id.gallery_note_tags)).
                         setText(sb.toString());
             }
@@ -187,10 +205,18 @@ public class SBActivity extends Activity {
                 return true;
             }
         });
+        viewNoteGallery.findViewById(R.id.note_gallery_examine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Note n = (Note)((View)g.getSelectedView()).getTag();
+                setViewSingleNote(n.getFileName());
+            }
+        });
+        
 
         Handler btProgressHandler = new Handler() {
             public void handleMessage(Message msg) {
-                if(btProgressDialog == null)
+                if (btProgressDialog == null)
                     return;
                 switch (msg.what) {
                     case BluetoothService.MSG_CONNECTED:
@@ -230,6 +256,7 @@ public class SBActivity extends Activity {
 
     @Override
     public void setContentView(View v) {
+        previousViews.push(activeView);
         super.setContentView(v);
         activeView = v;
     }
@@ -294,26 +321,22 @@ public class SBActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int key, KeyEvent ke) {
-        boolean handled = super.onKeyDown(key, ke);
+        boolean handled = false;
         if (key == KeyEvent.KEYCODE_BACK) {
-            if (activeView == viewNote) {
-                //if the user pressed back and was looking at a note
-                setContentView(viewCaptureNote);
-                handled = true;
-            } else if (activeView == viewCaptureNote) {
-                //if the user has a currently open note we'll discard it
-                if (viewCaptureNote.findViewById(R.id.discard).isEnabled()) {
-                    CameraPreview cam = (CameraPreview) viewCaptureNote.findViewById(R.id.surface);
-                    cam.setTakePictureButtons(true);
-                    cam.discardPicture();
-                    handled = true;
-                }
-            } else if (activeView == viewNoteGallery) {
-                setContentView(viewTagList);
-                handled = true;
-            }
+            handled = goBack();
         }
-        return handled;
+        return handled ? true : super.onKeyDown(key, ke);
+    }
+
+    private boolean goBack() {
+        boolean back = false;
+            View previous = null;
+            if (!previousViews.isEmpty() && (previous = previousViews.pop()) != null) {
+                setContentView(previous);
+                previousViews.pop();
+                back = true;
+            }
+        return back;
     }
 
     @Override
@@ -348,6 +371,13 @@ public class SBActivity extends Activity {
                 ListView lv = (ListView) viewTagList.findViewById(R.id.item_list);
                 ((TagViewListAdaptor) lv.getAdapter()).refreshData();
                 setContentView(viewTagList);
+                return true;
+            case R.id.menu_delete_note:
+                Note n = ((NoteView)viewNote).getNote();
+                db.deleteTag(n.getId());
+                Toast.makeText(SBActivity.this, "Note " + n.getId() +
+                        " deleted.", Toast.LENGTH_SHORT).show();
+                goBack();
                 return true;
             case R.id.menu_save_note:
                 setContentView(viewCaptureNote);

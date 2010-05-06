@@ -16,7 +16,7 @@ import jf.studybuddy.SBActivity;
 import java.io.File;
 
 public class NoteGalleryImageAdaptor extends BaseAdapter {
-    public static final int ITEM_HEIGHT = 360, ITEM_WIDTH = 420;
+    public static final int ITEM_HEIGHT = 375, ITEM_WIDTH = 420;
     private Context ctx;
     private ImageView[] loadedImages;
     private Cursor notes;

@@ -101,8 +101,9 @@ public class NoteView extends View implements ZoomButtonsController.OnZoomListen
         canvasRect = new RectF(tempX + (offX / 2), tempY + (offY / 2),
                 tempX + (c.getWidth() - (offX / 2)), tempY + (c.getHeight() - (offY / 2)));
 
-        c.drawBitmap(img, new Rect(0, 0, img.getWidth(), img.getHeight()),
-                canvasRect, null);
+        if (!img.isRecycled())
+            c.drawBitmap(img, new Rect(0, 0, img.getWidth(), img.getHeight()),
+                    canvasRect, null);
     }
 
     @Override

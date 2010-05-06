@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.UUID;
 
 public class BluetoothService {
-    public static final int BLUETOOTH_DISCOVERABLE_DURATION = 120;
+    public static final int BLUETOOTH_DISCOVERABLE_DURATION = 180;
     private static final int FRAME_STRING = 0, FRAME_IMG = 1,
             FRAME_START_NOTES = 2, FRAME_END_NOTES = 3;
     public static final int MSG_CONNECTED = 0, MSG_PROGRESS = 4, MSG_RECEIVING = 2, MSG_DONE = 3;
@@ -126,12 +126,17 @@ public class BluetoothService {
 
         public void run() {
             running = true;
+
             BluetoothServerSocket tmp = null;
             BluetoothSocket socket = null;
             try {
+                //open up a new bluetooth server socket with the given string for service name and uuid for identification
                 tmp = btAdapter.listenUsingRfcommWithServiceRecord(SBActivity.TAG, uuid);
+                //accept a socket from the serversocket
                 socket = tmp.accept();
 
+                //send a message to the progress bar handler informing it that we're connected.
+                //just for UI purposes.
                 Message m = Message.obtain();
                 m.what = MSG_CONNECTED;
                 progressHandler.sendMessage(m);
@@ -139,6 +144,7 @@ public class BluetoothService {
                 //once we open our socket, close the server socket
                 tmp.close();
             } catch (IOException e) {
+                //handle an exception - display an error message to the user, and print the stack to the console
                 handleBluetoothMsg(sbActivity.getString(R.string.bluetooth_connect_failed), e);
                 cancel();
                 //connection failed, no point hanging around
@@ -256,8 +262,6 @@ public class BluetoothService {
 
                 FrameHeader.writeToStream(socket.getOutputStream(), FrameHeader.TYPE_FINISHED_SENDING);
 
-                db.clearUpdateTable();
-
                 Message m = Message.obtain();
                 m.what = MSG_RECEIVING;
                 progressHandler.sendMessage(m);
@@ -316,17 +320,18 @@ public class BluetoothService {
                             new File(Environment.getExternalStorageDirectory(),
                                     Note.FOLDER_PREFIX + "/" + filename));
                     Log.i(SBActivity.TAG, "saving to "+fos.getFD().toString());
-                    /*buf = new byte[10240];
+                    buf = new byte[10240];
                     progress = 0;
                     int remaining = imgfileHeader.getLength();
-                    while ((read = socket.getInputStream().read(buf, 0, (remaining>buf.length) ? buf.length : remaining)) != -1) {
+                    while ((read = socket.getInputStream().read(buf, 0, (remaining>buf.length) ? buf.length : remaining)) != -1 && remaining > 0) {
                         fos.write(buf, 0, read);
                         remaining -= read;
                         progress += read;
                         updateProgress(progress, imgfileHeader.getLength());
-                    }*/
-                    for(int i=0; i<imgfileHeader.getLength(); i++)
-                        fos.write(socket.getInputStream().read());
+                    }
+                    //for(int i=0; i<imgfileHeader.getLength(); i++)
+                    //    fos.write(socket.getInputStream().read());
+                    fos.close();
                     Log.i(SBActivity.TAG, "done saving image!");
                 }
 
@@ -340,8 +345,10 @@ public class BluetoothService {
                 m.what = MSG_DONE;
                 progressHandler.sendMessage(m);
 
+                db.clearUpdateTable();
+
                 handleBluetoothMsg(sbActivity.getString(R.string.bluetooth_done), null);
-            } catch (IOException ioe) {
+            } catch (Exception ioe) {
                 handleBluetoothMsg(sbActivity.getString(R.string.bluetooth_error_sending), ioe);
             } finally {
                 cancel();
